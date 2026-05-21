@@ -1,12 +1,12 @@
 package com.costa.API_Clinica.especialidade.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.costa.API_Clinica.medico.entity.MedicoEntity;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -21,6 +21,9 @@ public class EspcialidadeEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String nomeEspecialidade;
+    private String nome;
+
+    @OneToMany(mappedBy = "especialidade")
+    private Set<MedicoEntity> medicos = new HashSet<>();
 
 }
