@@ -4,6 +4,8 @@ import com.costa.API_Clinica.consulta.entity.ConsultaEntity;
 import com.costa.API_Clinica.pagamento.entity.PagamentoEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -11,6 +13,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@Table(name = "pacientes")
 @Getter
 @Setter
 @Builder
@@ -20,6 +23,8 @@ public class PacienteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(length = 36, nullable = false, updatable = false)
     private UUID id;
 
     private String nome;

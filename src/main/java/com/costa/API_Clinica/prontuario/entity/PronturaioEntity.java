@@ -3,12 +3,15 @@ package com.costa.API_Clinica.prontuario.entity;
 import com.costa.API_Clinica.consulta.entity.ConsultaEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
+@Table(name = "prontuario")
 @Getter
 @Setter
 @Builder
@@ -18,6 +21,8 @@ public class PronturaioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(length = 36, nullable = false, updatable = false)
     private UUID id;
 
     private String diagnostico;

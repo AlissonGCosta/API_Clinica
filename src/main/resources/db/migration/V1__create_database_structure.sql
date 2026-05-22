@@ -15,6 +15,14 @@ CREATE TABLE  pacientes(
 
 );
 
+CREATE TABLE especialidade(
+                              id CHAR(36) NOT NULL,
+                              nome VARCHAR(150) NOT NULL,
+
+                              CONSTRAINT pk_especialidade PRIMARY KEY (id),
+                              CONSTRAINT uk_especialidade_nome UNIQUE (nome)
+);
+
 CREATE TABLE  medicos (
     id CHAR (36) NOT NULL,
     nome VARCHAR(150) NOT NULL,
@@ -45,13 +53,7 @@ CREATE TABLE consultas(
                       FOREIGN KEY (paciente_id) REFERENCES  pacientes(id)
 );
 
-CREATE TABLE especialidade(
-    id CHAR(36) NOT NULL,
-    nome VARCHAR(150) NOT NULL,
 
-    CONSTRAINT pk_especialidade PRIMARY KEY (id),
-    CONSTRAINT uk_especialidade_nome UNIQUE (nome)
-);
 
 CREATE TABLE prontuario (
     id CHAR(36) NOT NULL,
@@ -68,11 +70,33 @@ CREATE TABLE prontuario (
 
 );
 
-CREATE TABLE pagamento (
+CREATE TABLE pagamentos (
 
     id CHAR(36) NOT NULL,
+    consulta_id CHAR(36) NOT NULL,
+    paciente_id CHAR(36) NOT NULL,
+    forma_pagamento VARCHAR(30) NOT NULL,
+    status VARCHAR(30) NOT NULL,
+    valor DECIMAL(10,2) NOT NULL,
+    data_vencimento VARCHAR(20),
+    data_pagamento VARCHAR(20),
+    data_criado DATE NOT NULL,
 
-)
+    CONSTRAINT pk_pagamentos PRIMARY KEY (id),
+    CONSTRAINT uk_pagamentos_consulta UNIQUE (consulta_id),
+    CONSTRAINT fk_pagamentos_consulta
+                        FOREIGN KEY  (consulta_id) references consultas(id),
+    CONSTRAINT fk_pagamentos_paciente
+                        FOREIGN KEY  (paciente_id) REFERENCES pacientes(id),
+
+    CONSTRAINT ck_pagamentos_forma CHECK ( forma_pagamento IN ('PIX','CARTAO_CREDITO','CARTAO_DEBITO','DINHEIRO','BOLETO','CONVENIO','TRANSFERENCIA'
+                                                              )
+        ),
+    CONSTRAINT ck_pagamentos_status CHECK (
+        status IN ('PENDENTE','APROVADO','REPROVADO','CANCELADO','ESTORNADO')
+        )
+
+);
 
 
 

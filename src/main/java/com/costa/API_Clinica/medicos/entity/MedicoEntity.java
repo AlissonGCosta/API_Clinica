@@ -5,6 +5,8 @@ import com.costa.API_Clinica.especialidade.entity.EspcialidadeEntity;
 import com.costa.API_Clinica.pacientes.entity.Ativo;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -12,6 +14,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@Table(name = "medicos")
 @Getter
 @Setter
 @Builder
@@ -21,6 +24,8 @@ public class MedicoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(length = 36, nullable = false, updatable = false)
     private UUID id;
 
     private String nome;
@@ -34,7 +39,7 @@ public class MedicoEntity {
 
 
     @ManyToOne
-    @JoinColumn(name = "epspecialidade_id", referencedColumnName = "id")
+    @JoinColumn(name = "especialidade_id", referencedColumnName = "id")
     private EspcialidadeEntity especialidade;
 
     @OneToMany(mappedBy = "medico")
