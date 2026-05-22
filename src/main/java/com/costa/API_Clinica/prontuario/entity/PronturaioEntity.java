@@ -23,7 +23,7 @@ public class PronturaioEntity {
     private String diagnostico;
     private String prescricao;
     private String observacao;
-    private LocalDate data;
+    private LocalDate datacriacao;
 
     @OneToOne
     @JoinColumn(name = "consulta_id", referencedColumnName = "id")

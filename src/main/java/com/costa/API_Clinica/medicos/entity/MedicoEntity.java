@@ -1,16 +1,13 @@
-package com.costa.API_Clinica.medico.entity;
+package com.costa.API_Clinica.medicos.entity;
 
 import com.costa.API_Clinica.consulta.entity.ConsultaEntity;
 import com.costa.API_Clinica.especialidade.entity.EspcialidadeEntity;
-import com.costa.API_Clinica.paciente.entity.Ativo;
-import com.costa.API_Clinica.paciente.entity.PacienteEntity;
-import com.costa.API_Clinica.prontuario.entity.PronturaioEntity;
+import com.costa.API_Clinica.pacientes.entity.Ativo;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 

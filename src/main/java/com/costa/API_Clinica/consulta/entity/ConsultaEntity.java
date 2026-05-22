@@ -1,7 +1,7 @@
 package com.costa.API_Clinica.consulta.entity;
 
-import com.costa.API_Clinica.medico.entity.MedicoEntity;
-import com.costa.API_Clinica.paciente.entity.PacienteEntity;
+import com.costa.API_Clinica.medicos.entity.MedicoEntity;
+import com.costa.API_Clinica.pacientes.entity.PacienteEntity;
 import com.costa.API_Clinica.prontuario.entity.PronturaioEntity;
 import jakarta.persistence.*;
 import lombok.*;
