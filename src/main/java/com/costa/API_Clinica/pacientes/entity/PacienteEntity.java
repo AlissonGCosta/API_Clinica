@@ -39,7 +39,7 @@ public class PacienteEntity {
     private String senha;
 
     @OneToMany(mappedBy = "paciente")
-    private HashSet<ConsultaEntity> consultasPaciente = new HashSet<>();
+    private Set<ConsultaEntity> consultasPaciente = new HashSet<>();
 
     @OneToMany(mappedBy = "paciente")
     private Set<PagamentoEntity> pagamento = new HashSet<>();
