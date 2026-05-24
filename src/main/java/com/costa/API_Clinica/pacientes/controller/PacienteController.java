@@ -38,4 +38,16 @@ public class PacienteController {
         pacienteService.alteraNome(dto,id);
     }
 
+    @PatchMapping("/{id}/email")
+    @ResponseStatus(HttpStatus.OK)
+    public void alterarEmailPaciente(@Valid @RequestBody PacienteRequestEmailDto dto, @PathVariable UUID id){
+        pacienteService.alteraEmail(dto,id);
+    }
+
+    @PatchMapping("/{id}/senha")
+    @ResponseStatus(HttpStatus.OK)
+    public void alterarSenhaPaciente(@Valid @RequestBody PacienteRequestSenhaDto dto, @PathVariable UUID id){
+        pacienteService.aleteraSenha(dto,id);
+    }
+
 }
