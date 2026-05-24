@@ -113,5 +113,18 @@ public class PacienteService {
 //
 //
 //    }
+    //metodo para alterar email
+    public void alteraEmail(PacienteRequestEmailDto dto, UUID id) {
+
+        //validando
+        PacienteEntity emailPaciente = pacienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Paciente nao encontrado"));
+
+        //alterando
+        emailPaciente.setEmail(dto.getEmail());
+
+        //salvando
+        pacienteRepository.save(emailPaciente);
+    }
 
 }
