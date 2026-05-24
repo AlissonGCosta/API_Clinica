@@ -1,7 +1,9 @@
 package com.costa.API_Clinica.pacientes.controller;
 
 import com.costa.API_Clinica.pacientes.dto.request.PacienteRequestDto;
+import com.costa.API_Clinica.pacientes.dto.request.PacienteRequestEmailDto;
 import com.costa.API_Clinica.pacientes.dto.request.PacienteRequestNameDto;
+import com.costa.API_Clinica.pacientes.dto.request.PacienteRequestSenhaDto;
 import com.costa.API_Clinica.pacientes.dto.response.PacienteResponseDto;
 import com.costa.API_Clinica.pacientes.service.PacienteService;
 import jakarta.validation.Valid;
