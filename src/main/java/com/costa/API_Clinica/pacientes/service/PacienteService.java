@@ -76,7 +76,7 @@ public class PacienteService {
     }
 
     //listando apenas o paciente pelo id inserido
-    public Optional<PacienteResponseDto> getPaciente(UUID id) {
+    public Optional<PacienteResponseDto> listarPacientePorId(UUID id) {
 
         //validando se o cpf existe
         if(pacienteRepository.findById(id).isEmpty()) {
