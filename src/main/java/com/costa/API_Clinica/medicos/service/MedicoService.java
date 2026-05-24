@@ -81,7 +81,7 @@ public class MedicoService {
 
         //validando e salvando se achou algo
               MedicoEntity medico =  medicosRepository.findById(id)
-                              .orElseThrow(() -> new RuntimeException(notfound));
+                              .orElseThrow(() -> new ResourceNotFoundException(notfound));
 
                 return new MedicoResponseDto(
                         medico.getId(),
@@ -101,7 +101,7 @@ public class MedicoService {
 
         //validando e salvando
         MedicoEntity medico = medicosRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException(notfound));
+                .orElseThrow(() -> new ResourceNotFoundException(notfound));
 
         //deletando do banco de dados
         medicosRepository.delete(medico);
@@ -111,7 +111,7 @@ public class MedicoService {
     public void alterarNome(MedicoRequestNomeDto dto, UUID id){
 
         MedicoEntity nomeMedico = medicosRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException(notfound));
+                .orElseThrow(() -> new ResourceNotFoundException(notfound));
 
         nomeMedico.setNome(dto.getNome());
 
@@ -124,7 +124,7 @@ public class MedicoService {
 
         //validando e salvando o medico
         MedicoEntity senhaMedico = medicosRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException(notfound));
+                .orElseThrow(() -> new ResourceNotFoundException(notfound));
 
         //verificando se a senha antiga bate
         boolean senhaValida = passwordConfig.passwordEncoder().matches(dto.getSenhaAntiga(), senhaMedico.getSenha());
