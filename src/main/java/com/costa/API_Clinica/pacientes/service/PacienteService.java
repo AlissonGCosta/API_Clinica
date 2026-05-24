@@ -81,6 +81,23 @@ public class PacienteService {
 
     }
 
+    //deletar simples do paciente
+    public void deletePaciente(UUID id) {
+        if(pacienteRepository.findById(id).isEmpty()) {
+            throw new RuntimeException("Paciente nao encontrado");
+        }
+        pacienteRepository.deleteById(id);
+    }
+
+    //metodo para alterar nome
+    public void alteraNome(PacienteRequestNameDto dto, UUID id) {
+
+        //validando se o id existe
+        PacienteEntity nomePaciente = pacienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Paciente nao encontrado"));
+
+        //alterando o nome do paciente
+        nomePaciente.setNome(dto.getNome());
 
 //    public void alteraNome(PacienteRequestNameDto dto, UUID id) {
 //
