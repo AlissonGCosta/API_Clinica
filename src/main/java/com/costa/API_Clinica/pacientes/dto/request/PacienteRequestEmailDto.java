@@ -1,5 +1,6 @@
 package com.costa.API_Clinica.pacientes.dto.request;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
@@ -10,9 +11,10 @@ import org.springframework.validation.annotation.Validated;
 @NoArgsConstructor
 @AllArgsConstructor
 @Validated
-public class PacienteRequestNameDto {
+public class PacienteRequestEmailDto {
 
     @NotBlank
-    String nome;
+    @Email
+    private String email;
 
 }

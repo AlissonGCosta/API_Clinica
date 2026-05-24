@@ -10,9 +10,11 @@ import org.springframework.validation.annotation.Validated;
 @NoArgsConstructor
 @AllArgsConstructor
 @Validated
-public class PacienteRequestNameDto {
+public class PacienteRequestSenhaDto {
 
     @NotBlank
-    String nome;
+    String senhaAntiga;
 
+    @NotBlank
+    String novaSenha;
 }
