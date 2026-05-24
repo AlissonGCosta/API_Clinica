@@ -26,6 +26,4 @@ public class PacienteRequestDto {
 
     @NotBlank
     private String senha;
-
-    private LocalDate dataCriacao;
 }
