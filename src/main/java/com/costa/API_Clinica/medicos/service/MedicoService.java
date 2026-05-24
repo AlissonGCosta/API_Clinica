@@ -129,7 +129,7 @@ public class MedicoService {
         //verificando se a senha antiga bate
         boolean senhaValida = passwordConfig.passwordEncoder().matches(dto.getSenhaAntiga(), senhaMedico.getSenha());
         if(!senhaValida) {
-            throw new RuntimeException("Senha Invalida");
+            throw new UnauthorizedException("Senha Invalida");
         }
 
         //setando uma nova senha
