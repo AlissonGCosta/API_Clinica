@@ -143,7 +143,7 @@ public class PacienteService {
         //retornando uma comparação das senhas antigas
         boolean senhaValida = passwordConfig.passwordEncoder().matches(dto.getSenhaAntiga(), senhaPaciente.getSenha());
         if(!senhaValida) {
-            throw new RuntimeException("Senha Invalida");
+            throw new UnauthorizedException("Senha Invalida");
         }
 
         //setando nova senha
