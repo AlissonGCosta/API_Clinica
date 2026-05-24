@@ -10,7 +10,6 @@ import com.costa.API_Clinica.pacientes.entity.Ativo;
 import com.costa.API_Clinica.pacientes.entity.PacienteEntity;
 import com.costa.API_Clinica.pacientes.repository.PacienteRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -150,6 +149,8 @@ public class PacienteService {
         //setando nova senha
         senhaPaciente.setSenha(passwordConfig.passwordEncoder().encode(dto.getNovaSenha()));
 
+        //salvando a senha no repository
+        pacienteRepository.save(senhaPaciente);
     }
 
 }
