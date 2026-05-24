@@ -34,7 +34,7 @@ public class PacienteService {
 
         //validando se o paciente ja foi cadastrado
         if(pacienteRepository.findByCpf(dto.getCpf()).isPresent() || pacienteRepository.findByEmail(dto.getEmail()).isPresent()) {
-            throw new RuntimeException("Usuario Ja cadastrado");
+            throw new ConflictException("Usuario Ja cadastrado");
         }
 
         //padronizando os cpfs
