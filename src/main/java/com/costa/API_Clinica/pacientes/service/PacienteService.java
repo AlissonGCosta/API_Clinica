@@ -99,20 +99,11 @@ public class PacienteService {
         //alterando o nome do paciente
         nomePaciente.setNome(dto.getNome());
 
-//    public void alteraNome(PacienteRequestNameDto dto, UUID id) {
-//
-//        //validando se o id existe
-//        if(pacienteRepository.findById(id).isEmpty()) {
-//            throw new RuntimeException("Paciente nao encontrado");
-//        }
-//
-//        return pacienteRepository.findById(id).stream()
-//                .map(p
-//                )
-//
-//
-//
-//    }
+        //salvando o novo nome no repository
+        pacienteRepository.save(nomePaciente);
+
+    }
+
     //metodo para alterar email
     public void alteraEmail(PacienteRequestEmailDto dto, UUID id) {
 
@@ -125,6 +116,24 @@ public class PacienteService {
 
         //salvando
         pacienteRepository.save(emailPaciente);
+    }
+
+    //alterando a senha
+    public void aleteraSenha(PacienteRequestSenhaDto dto, UUID id) {
+
+        //validando o cpf
+        PacienteEntity senhaPaciente = pacienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Paciente nao encontrado"));
+
+        //retornando uma comparação das senhas anntigas
+        boolean senhaValida = passwordConfig.passwordEncoder().matches(dto.getSenhaAntiga(), senhaPaciente.getSenha());
+        if(!senhaValida) {
+            throw new RuntimeException("Senha Invalida");
+        }
+
+        //setando nova senha
+        senhaPaciente.setSenha(passwordConfig.passwordEncoder().encode(dto.getNovaSenha()));
+
     }
 
 }
