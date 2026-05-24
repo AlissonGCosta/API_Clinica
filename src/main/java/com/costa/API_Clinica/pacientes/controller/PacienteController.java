@@ -52,4 +52,10 @@ public class PacienteController {
         pacienteService.aleteraSenha(dto,id);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletarPaciente(@PathVariable UUID id){
+        pacienteService.deletePaciente(id);
+    }
+
 }
