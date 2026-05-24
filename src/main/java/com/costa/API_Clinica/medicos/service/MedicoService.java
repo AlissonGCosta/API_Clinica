@@ -1,6 +1,10 @@
 package com.costa.API_Clinica.medicos.service;
 
 import com.costa.API_Clinica.config.PasswordConfig;
+import com.costa.API_Clinica.exception.BadRequestException;
+import com.costa.API_Clinica.exception.ConflictException;
+import com.costa.API_Clinica.exception.ResourceNotFoundException;
+import com.costa.API_Clinica.exception.UnauthorizedException;
 import com.costa.API_Clinica.medicos.dto.request.MedicoRequestDto;
 import com.costa.API_Clinica.medicos.dto.request.MedicoRequestNomeDto;
 import com.costa.API_Clinica.medicos.dto.request.MedicoRequestSenhaDto;
@@ -34,7 +38,7 @@ public class MedicoService {
 
         //validando se ele ja existe
         if(medicosRepository.findByCrm(dto.getCrm()).isPresent()){
-            throw new RuntimeException("Medico ja cadastrado com o CRM");
+            throw new ConflictException("Medico ja cadastrado com o CRM");
         }
 
         //criptografando a senha
