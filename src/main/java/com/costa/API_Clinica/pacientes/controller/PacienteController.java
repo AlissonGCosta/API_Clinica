@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequestMapping("/v1/pacientes")
@@ -32,6 +33,12 @@ public class PacienteController {
     @ResponseStatus(HttpStatus.OK)
     public List<PacienteResponseDto> listarPacientes(){
         return pacienteService.listarPaciente();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Optional<PacienteResponseDto> listarPacientePorId(@PathVariable UUID id){
+        return pacienteService.listarPacientePorId(id);
     }
 
     @PatchMapping("/{id}/nomes")
