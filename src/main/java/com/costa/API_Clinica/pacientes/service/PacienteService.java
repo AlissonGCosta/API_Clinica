@@ -1,6 +1,9 @@
 package com.costa.API_Clinica.pacientes.service;
 
 import com.costa.API_Clinica.config.PasswordConfig;
+import com.costa.API_Clinica.exception.ConflictException;
+import com.costa.API_Clinica.exception.ResourceNotFoundException;
+import com.costa.API_Clinica.exception.UnauthorizedException;
 import com.costa.API_Clinica.pacientes.dto.request.PacienteRequestDto;
 import com.costa.API_Clinica.pacientes.dto.request.PacienteRequestEmailDto;
 import com.costa.API_Clinica.pacientes.dto.request.PacienteRequestNameDto;
@@ -77,7 +80,7 @@ public class PacienteService {
 
         //validando se o cpf existe
         if(pacienteRepository.findById(id).isEmpty()) {
-            throw new RuntimeException("Paciente nao encontrado");
+            throw new ResourceNotFoundException("Paciente nao encontrado");
         }
 
         //chamando o paciente pelo Id encontrado
@@ -99,7 +102,7 @@ public class PacienteService {
     //deletar simples do paciente
     public void deletePaciente(UUID id) {
         if(pacienteRepository.findById(id).isEmpty()) {
-            throw new RuntimeException("Paciente nao encontrado");
+            throw new ResourceNotFoundException("Paciente nao encontrado");
         }
         pacienteRepository.deleteById(id);
     }
@@ -109,7 +112,7 @@ public class PacienteService {
 
         //validando se o id existe
         PacienteEntity nomePaciente = pacienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Paciente nao encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Paciente nao encontrado"));
 
         //alterando o nome do paciente
         nomePaciente.setNome(dto.getNome());
@@ -124,7 +127,7 @@ public class PacienteService {
 
         //validando
         PacienteEntity emailPaciente = pacienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Paciente nao encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Paciente nao encontrado"));
 
         //alterando
         emailPaciente.setEmail(dto.getEmail());
@@ -138,7 +141,7 @@ public class PacienteService {
 
         //validando o cpf
         PacienteEntity senhaPaciente = pacienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Paciente nao encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Paciente nao encontrado"));
 
         //retornando uma comparação das senhas antigas
         boolean senhaValida = passwordConfig.passwordEncoder().matches(dto.getSenhaAntiga(), senhaPaciente.getSenha());
