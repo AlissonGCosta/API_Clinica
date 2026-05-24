@@ -141,7 +141,7 @@ public class PacienteService {
         PacienteEntity senhaPaciente = pacienteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Paciente nao encontrado"));
 
-        //retornando uma comparação das senhas anntigas
+        //retornando uma comparação das senhas antigas
         boolean senhaValida = passwordConfig.passwordEncoder().matches(dto.getSenhaAntiga(), senhaPaciente.getSenha());
         if(!senhaValida) {
             throw new RuntimeException("Senha Invalida");
