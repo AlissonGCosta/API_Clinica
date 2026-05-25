@@ -1,10 +1,11 @@
-package com.costa.API_Clinica.medicos.controller;
+package org.costa.API_Clinica.medicos.controller;
 
-import com.costa.API_Clinica.medicos.dto.request.MedicoRequestDto;
-import com.costa.API_Clinica.medicos.dto.request.MedicoRequestNomeDto;
-import com.costa.API_Clinica.medicos.dto.request.MedicoRequestSenhaDto;
-import com.costa.API_Clinica.medicos.dto.response.MedicoResponseDto;
-import com.costa.API_Clinica.medicos.service.MedicoService;
+import org.costa.API_Clinica.medicos.dto.request.MedicoRequestDto;
+import org.costa.API_Clinica.medicos.dto.request.MedicoRequestNomeDto;
+import org.costa.API_Clinica.medicos.dto.request.MedicoRequestPutDto;
+import org.costa.API_Clinica.medicos.dto.request.MedicoRequestSenhaDto;
+import org.costa.API_Clinica.medicos.dto.response.MedicoResponseDto;
+import org.costa.API_Clinica.medicos.service.MedicoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

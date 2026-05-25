@@ -1,11 +1,8 @@
-package com.costa.API_Clinica.pacientes.controller;
+package org.costa.API_Clinica.pacientes.controller;
 
-import com.costa.API_Clinica.pacientes.dto.request.PacienteRequestDto;
-import com.costa.API_Clinica.pacientes.dto.request.PacienteRequestEmailDto;
-import com.costa.API_Clinica.pacientes.dto.request.PacienteRequestNameDto;
-import com.costa.API_Clinica.pacientes.dto.request.PacienteRequestSenhaDto;
-import com.costa.API_Clinica.pacientes.dto.response.PacienteResponseDto;
-import com.costa.API_Clinica.pacientes.service.PacienteService;
+import org.costa.API_Clinica.pacientes.dto.request.*;
+import org.costa.API_Clinica.pacientes.dto.response.PacienteResponseDto;
+import org.costa.API_Clinica.pacientes.service.PacienteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -71,5 +68,6 @@ public class PacienteController {
     public void deletarPaciente(@PathVariable UUID id){
         pacienteService.deletePaciente(id);
     }
+
 
 }
