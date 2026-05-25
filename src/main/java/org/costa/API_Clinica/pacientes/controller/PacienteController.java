@@ -41,6 +41,13 @@ public class PacienteController {
         return pacienteService.listarPacientePorId(id);
     }
 
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void putPaciente(@PathVariable UUID id, @Valid @RequestBody PacienteRequestPutDto dto){
+        pacienteService.putPaciente(dto, id);
+    }
+
+
     @PatchMapping("/{id}/nomes")
     @ResponseStatus(HttpStatus.OK)
     public void alterarNomePacinete(@Valid @RequestBody PacienteRequestNameDto dto, @PathVariable UUID id){
