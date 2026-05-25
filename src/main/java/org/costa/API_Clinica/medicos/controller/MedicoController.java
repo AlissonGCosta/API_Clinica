@@ -32,6 +32,12 @@ public class MedicoController {
         return medicoService.listarMedicos();
     }
 
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void putMedico(@PathVariable UUID id, @Valid @RequestBody MedicoRequestPutDto dto){
+        medicoService.putMedico(dto, id);
+    }
+
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public MedicoResponseDto buscarMedicoPorId(@PathVariable UUID id){
