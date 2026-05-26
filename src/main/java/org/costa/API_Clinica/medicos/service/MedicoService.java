@@ -1,6 +1,8 @@
 package org.costa.API_Clinica.medicos.service;
 
 import org.costa.API_Clinica.config.PasswordConfig;
+import org.costa.API_Clinica.especialidade.entity.EspcialidadeEntity;
+import org.costa.API_Clinica.especialidade.repository.EspecialidadeRepository;
 import org.costa.API_Clinica.exception.ConflictException;
 import org.costa.API_Clinica.exception.ResourceNotFoundException;
 import org.costa.API_Clinica.exception.UnauthorizedException;
@@ -25,6 +27,7 @@ public class MedicoService {
 
     //camando o repositorio
     private final MedicosRepository medicosRepository;
+    private final EspecialidadeRepository especialidadeRepository;
 
     //chamando o codificador da senha
     private final PasswordConfig passwordConfig;
@@ -156,6 +159,21 @@ public class MedicoService {
         novoMedico.setCrm(dto.getCrm());
         novoMedico.setDataAtualizacao(LocalDate.now());
         medicosRepository.save(novoMedico);
+    }
+
+    //criando o metodo para escolhero um cargo
+    public void escolherEspecialidadePorId(UUID espId, UUID medId){
+
+        //
+        EspcialidadeEntity especialidade = especialidadeRepository.findById(espId)
+                .orElseThrow(() -> new ResourceNotFoundException("Especialalidade não encontrada"));
+
+        MedicoEntity especialidadeMedico = medicosRepository.findById(medId)
+                .orElseThrow(() -> new ResourceNotFoundException(notfound));
+
+        especialidadeMedico.setDataAtualizacao(LocalDate.now());
+        especialidadeMedico.setEspecialidade(especialidade);
+        medicosRepository.save(especialidadeMedico);
     }
 
 
