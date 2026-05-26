@@ -1,6 +1,8 @@
 package org.costa.API_Clinica.especialidade.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.costa.API_Clinica.medicos.entity.MedicoEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,6 +31,7 @@ public class EspcialidadeEntity {
     private String nome;
 
     @OneToMany(mappedBy = "especialidade")
+    @JsonBackReference
     private Set<MedicoEntity> medicos = new HashSet<>();
 
 }
