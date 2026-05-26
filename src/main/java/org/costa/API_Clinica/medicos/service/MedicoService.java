@@ -117,6 +117,7 @@ public class MedicoService {
                 .orElseThrow(() -> new ResourceNotFoundException(notfound));
 
         nomeMedico.setNome(dto.getNome());
+        nomeMedico.setDataAtualizacao(LocalDate.now());
 
         medicosRepository.save(nomeMedico);
 
@@ -137,6 +138,7 @@ public class MedicoService {
 
         //setando uma nova senha
         senhaMedico.setSenha(passwordConfig.passwordEncoder().encode(dto.getNovaSenha()));
+        senhaMedico.setDataAtualizacao(LocalDate.now());
 
         //salvando a senha no banco de dados
         medicosRepository.save(senhaMedico);
