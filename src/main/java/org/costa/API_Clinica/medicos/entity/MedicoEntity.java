@@ -1,5 +1,7 @@
 package org.costa.API_Clinica.medicos.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.costa.API_Clinica.consulta.entity.ConsultaEntity;
 import org.costa.API_Clinica.especialidade.entity.EspcialidadeEntity;
 import org.costa.API_Clinica.pacientes.entity.Ativo;
