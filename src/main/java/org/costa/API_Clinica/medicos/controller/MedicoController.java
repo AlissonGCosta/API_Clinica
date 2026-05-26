@@ -63,4 +63,10 @@ public class MedicoController {
         medicoService.alterarSenha(dto, id);
     }
 
+    @PostMapping("/especialidade/{espId}/medico/{medId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void setarEspecialidadeMedico(@PathVariable UUID espId, @PathVariable UUID medId){
+        medicoService.escolherEspecialidadePorId(espId, medId);
+    }
+
 }
