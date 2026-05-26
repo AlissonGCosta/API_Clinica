@@ -113,6 +113,7 @@ public class PacienteService {
 
         //alterando o nome do paciente
         nomePaciente.setNome(dto.getNome());
+        nomePaciente.setDataAtualizacao(LocalDate.now());
 
         //salvando o novo nome no repository
         pacienteRepository.save(nomePaciente);
@@ -128,6 +129,7 @@ public class PacienteService {
 
         //alterando
         emailPaciente.setEmail(dto.getEmail());
+        emailPaciente.setDataAtualizacao(LocalDate.now());
 
         //salvando
         pacienteRepository.save(emailPaciente);
@@ -148,6 +150,7 @@ public class PacienteService {
 
         //setando nova senha
         senhaPaciente.setSenha(passwordConfig.passwordEncoder().encode(dto.getNovaSenha()));
+        senhaPaciente.setDataAtualizacao(LocalDate.now());
 
         //salvando a senha no repository
         pacienteRepository.save(senhaPaciente);
