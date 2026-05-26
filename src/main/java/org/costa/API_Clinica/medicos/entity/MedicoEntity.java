@@ -42,6 +42,7 @@ public class MedicoEntity {
 
     @ManyToOne
     @JoinColumn(name = "especialidade_id", referencedColumnName = "id")
+    @JsonManagedReference
     private EspcialidadeEntity especialidade;
 
     @OneToMany(mappedBy = "medico")
