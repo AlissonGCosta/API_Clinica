@@ -1,6 +1,7 @@
 package org.costa.API_Clinica.pacientes.service;
 
 import org.costa.API_Clinica.config.PasswordConfig;
+import org.costa.API_Clinica.consulta.dto.response.ConsultasResponseDto;
 import org.costa.API_Clinica.exception.ConflictException;
 import org.costa.API_Clinica.exception.ResourceNotFoundException;
 import org.costa.API_Clinica.exception.UnauthorizedException;
@@ -67,7 +68,20 @@ public class PacienteService {
                         paciente.getDataCriacao(),
                         paciente.getEstado(),
                         paciente.getDataAtualizacao(),
-                        paciente.getConsultasPaciente(),
+                        paciente.getConsultasPaciente().stream().map(
+                                consulta -> new ConsultasResponseDto(
+                                consulta.getId(),
+                                consulta.getMedico().getId(),
+                                consulta.getPaciente().getId(),
+                                consulta.getData_consulta(),
+                                consulta.getHora_consulta(),
+                                consulta.getProntuario(),
+                                consulta.getConsultaStatus(),
+                                consulta.getPagamento(),
+                                consulta.getMotivoCancelamento(),
+                                consulta.getDataCriacao(),
+                                consulta.getDataAtualizacao()
+                        )).toList(),
                         paciente.getPagamento()
                 )).toList();
     }
@@ -90,7 +104,21 @@ public class PacienteService {
                         paciente.getDataCriacao(),
                         paciente.getEstado(),
                         paciente.getDataAtualizacao(),
-                        paciente.getConsultasPaciente(),
+                        paciente.getConsultasPaciente().stream().map(
+                                consulta -> new ConsultasResponseDto(
+                                        consulta.getId(),
+                                        consulta.getMedico().getId(),
+                                        consulta.getPaciente().getId(),
+                                        consulta.getData_consulta(),
+                                        consulta.getHora_consulta(),
+                                        consulta.getProntuario(),
+                                        consulta.getConsultaStatus(),
+                                        consulta.getPagamento(),
+                                        consulta.getMotivoCancelamento(),
+                                        consulta.getDataCriacao(),
+                                        consulta.getDataAtualizacao()
+                                )
+                        ).toList(),
                         paciente.getPagamento()
                 )).findFirst();
 

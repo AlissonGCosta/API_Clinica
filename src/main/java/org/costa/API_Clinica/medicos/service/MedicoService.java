@@ -166,10 +166,11 @@ public class MedicoService {
     //criando o metodo para escolhero um cargo
     public void escolherEspecialidadePorId(UUID espId, UUID medId){
 
-        //
+        //validando se existe a especialidade e armazenando a
         EspcialidadeEntity especialidade = especialidadeRepository.findById(espId)
                 .orElseThrow(() -> new ResourceNotFoundException("Especialalidade não encontrada"));
 
+        //valiando o medico e salvando
         MedicoEntity especialidadeMedico = medicosRepository.findById(medId)
                 .orElseThrow(() -> new ResourceNotFoundException(notfound));
 

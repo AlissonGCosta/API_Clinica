@@ -46,5 +46,6 @@ public class MedicoEntity {
     private EspcialidadeEntity especialidade;
 
     @OneToMany(mappedBy = "medico")
+    @JsonBackReference
     private Set<ConsultaEntity> consultas = new HashSet<>();
 }
