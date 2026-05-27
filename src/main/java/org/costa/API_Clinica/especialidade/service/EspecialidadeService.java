@@ -1,8 +1,8 @@
 package org.costa.API_Clinica.especialidade.service;
 
 import lombok.RequiredArgsConstructor;
-import org.costa.API_Clinica.especialidade.dtos.request.EspecialidadeRequestDto;
-import org.costa.API_Clinica.especialidade.dtos.response.EspecialidadeResponseDto;
+import org.costa.API_Clinica.especialidade.dto.request.EspecialidadeRequestDto;
+import org.costa.API_Clinica.especialidade.dto.response.EspecialidadeResponseDto;
 import org.costa.API_Clinica.especialidade.entity.EspcialidadeEntity;
 import org.costa.API_Clinica.especialidade.repository.EspecialidadeRepository;
 import org.costa.API_Clinica.exception.ConflictException;
