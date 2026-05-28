@@ -48,8 +48,8 @@ public class ConsultaEntity {
     @OneToOne(mappedBy = "consulta")
     private PagamentoEntity pagamento;
 
-    private String data_consulta;
-    private String hora_consulta;
+    private String dataConsulta;
+    private String horaConsulta;
 
     @Enumerated(EnumType.STRING)
     private ConsultaStatus consultaStatus;
