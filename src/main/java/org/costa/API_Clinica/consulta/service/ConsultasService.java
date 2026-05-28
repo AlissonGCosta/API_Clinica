@@ -41,8 +41,8 @@ public class ConsultasService {
 
         // validando se o medico entity ja tem uma para essa consulta
         boolean checagemDataeHora = medicoEntity.getConsultas().stream()
-                .anyMatch(c -> c.getData_consulta().equals(dto.getData_consulta())
-                && c.getHora_consulta().equals(dto.getHora_consulta())
+                .anyMatch(c -> c.getDataConsulta().equals(dto.getDataConsulta())
+                && c.getHoraConsulta().equals(dto.getHoraConsulta())
                 );
         if(checagemDataeHora){
             throw new ConflictException("ja Existe um consulta Agendada com essa Data e Hora");
@@ -53,8 +53,8 @@ public class ConsultasService {
         ConsultaEntity novaConsulta =  ConsultaEntity.builder()
                 .medico(medicoEntity)
                 .paciente(pacienteEntity)
-                .data_consulta(dto.getData_consulta())
-                .hora_consulta(dto.getHora_consulta())
+                .dataConsulta(dto.getDataConsulta())
+                .horaConsulta(dto.getHoraConsulta())
                 .consultaStatus(ConsultaStatus.AGENDADA)
                 .motivoCancelamento(dto.getMotivoCancelamento())
                 .DataCriacao(LocalDate.now())
@@ -72,8 +72,8 @@ public class ConsultasService {
                         consulta.getId(),
                         consulta.getMedico().getId(),
                         consulta.getPaciente().getId(),
-                        consulta.getData_consulta(),
-                        consulta.getHora_consulta(),
+                        consulta.getDataConsulta(),
+                        consulta.getHoraConsulta(),
                         consulta.getProntuario(),
                         consulta.getConsultaStatus(),
                         consulta.getPagamento(),
