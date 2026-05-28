@@ -13,10 +13,10 @@ import org.springframework.validation.annotation.Validated;
 public class ConsultasRequestDto {
 
     @NotNull
-    private String data_consulta;
+    private String dataConsulta;
 
     @NotNull
-    private String hora_consulta;
+    private String horaConsulta;
 
     private String motivoCancelamento;
 }
