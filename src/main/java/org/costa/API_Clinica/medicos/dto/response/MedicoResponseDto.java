@@ -1,5 +1,6 @@
 package org.costa.API_Clinica.medicos.dto.response;
 
+import org.costa.API_Clinica.consulta.dto.response.ConsultasResponseDto;
 import org.costa.API_Clinica.consulta.entity.ConsultaEntity;
 import org.costa.API_Clinica.especialidade.entity.EspcialidadeEntity;
 import org.costa.API_Clinica.pacientes.entity.Ativo;
