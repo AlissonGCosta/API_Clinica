@@ -1,6 +1,7 @@
 package org.costa.API_Clinica.medicos.service;
 
 import org.costa.API_Clinica.config.PasswordConfig;
+import org.costa.API_Clinica.consulta.dto.response.ConsultasResponseDto;
 import org.costa.API_Clinica.especialidade.entity.EspcialidadeEntity;
 import org.costa.API_Clinica.especialidade.repository.EspecialidadeRepository;
 import org.costa.API_Clinica.exception.ConflictException;
@@ -74,7 +75,20 @@ public class MedicoService {
                         medico.getDataCriacao(),
                         medico.getDataAtualizacao(),
                         medico.getEspecialidade(),
-                        medico.getConsultas()
+                        medico.getConsultas().stream()
+                                .map(consulta -> new ConsultasResponseDto(
+                                        consulta.getId(),
+                                        consulta.getMedico().getId(),
+                                        consulta.getPaciente().getId(),
+                                        consulta.getDataConsulta(),
+                                        consulta.getHoraConsulta(),
+                                        consulta.getProntuario(),
+                                        consulta.getConsultaStatus(),
+                                        consulta.getPagamento(),
+                                        consulta.getMotivoCancelamento(),
+                                        consulta.getDataCriacao(),
+                                        consulta.getDataAtualizacao()
+                                )).toList()
 
                 )).toList();
     }
@@ -94,7 +108,20 @@ public class MedicoService {
                         medico.getDataCriacao(),
                         medico.getDataAtualizacao(),
                         medico.getEspecialidade(),
-                        medico.getConsultas()
+                        medico.getConsultas().stream()
+                                .map(consulta -> new ConsultasResponseDto(
+                                        consulta.getId(),
+                                        consulta.getMedico().getId(),
+                                        consulta.getPaciente().getId(),
+                                        consulta.getDataConsulta(),
+                                        consulta.getHoraConsulta(),
+                                        consulta.getProntuario(),
+                                        consulta.getConsultaStatus(),
+                                        consulta.getPagamento(),
+                                        consulta.getMotivoCancelamento(),
+                                        consulta.getDataCriacao(),
+                                        consulta.getDataAtualizacao()
+                                )).toList()
                 );
 
     }
