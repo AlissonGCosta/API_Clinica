@@ -16,6 +16,7 @@ import org.costa.API_Clinica.medicos.entity.MedicoEntity;
 import org.costa.API_Clinica.medicos.repository.MedicosRepository;
 import org.costa.API_Clinica.pacientes.entity.Ativo;
 import lombok.RequiredArgsConstructor;
+import org.costa.API_Clinica.prontuario.dto.response.ProntuarioResponseDto;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -82,7 +83,7 @@ public class MedicoService {
                                         consulta.getPaciente().getId(),
                                         consulta.getDataConsulta(),
                                         consulta.getHoraConsulta(),
-                                        consulta.getProntuario(),
+                                        consulta.getProntuario().getDiagnostico(),
                                         consulta.getConsultaStatus(),
                                         consulta.getPagamento(),
                                         consulta.getMotivoCancelamento(),
@@ -115,7 +116,7 @@ public class MedicoService {
                                         consulta.getPaciente().getId(),
                                         consulta.getDataConsulta(),
                                         consulta.getHoraConsulta(),
-                                        consulta.getProntuario(),
+                                        consulta.getProntuario().getDiagnostico(),
                                         consulta.getConsultaStatus(),
                                         consulta.getPagamento(),
                                         consulta.getMotivoCancelamento(),

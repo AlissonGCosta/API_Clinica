@@ -2,6 +2,7 @@ package org.costa.API_Clinica.pacientes.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.costa.API_Clinica.consulta.entity.ConsultaEntity;
+import org.costa.API_Clinica.pagamento.dto.response.PagamentoResponse;
 import org.costa.API_Clinica.pagamento.entity.PagamentoEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,6 +11,7 @@ import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -45,5 +47,6 @@ public class PacienteEntity {
 
     @OneToMany(mappedBy = "paciente")
     private Set<PagamentoEntity> pagamento = new HashSet<>();
+
 
 }

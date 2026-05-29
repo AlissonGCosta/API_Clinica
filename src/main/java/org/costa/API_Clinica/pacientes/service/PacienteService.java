@@ -2,6 +2,7 @@ package org.costa.API_Clinica.pacientes.service;
 
 import org.costa.API_Clinica.config.PasswordConfig;
 import org.costa.API_Clinica.consulta.dto.response.ConsultasResponseDto;
+import org.costa.API_Clinica.consulta.dto.response.ConsultasResponsePacienteDto;
 import org.costa.API_Clinica.exception.ConflictException;
 import org.costa.API_Clinica.exception.ResourceNotFoundException;
 import org.costa.API_Clinica.exception.UnauthorizedException;
@@ -11,6 +12,8 @@ import org.costa.API_Clinica.pacientes.entity.Ativo;
 import org.costa.API_Clinica.pacientes.entity.PacienteEntity;
 import org.costa.API_Clinica.pacientes.repository.PacienteRepository;
 import lombok.RequiredArgsConstructor;
+import org.costa.API_Clinica.pagamento.dto.response.PagamentoResponse;
+import org.costa.API_Clinica.prontuario.dto.response.ProntuarioResponseDto;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -69,20 +72,29 @@ public class PacienteService {
                         paciente.getEstado(),
                         paciente.getDataAtualizacao(),
                         paciente.getConsultasPaciente().stream().map(
-                                consulta -> new ConsultasResponseDto(
+                                consulta -> new ConsultasResponsePacienteDto(
                                 consulta.getId(),
                                 consulta.getMedico().getId(),
                                 consulta.getPaciente().getId(),
                                 consulta.getDataConsulta(),
                                 consulta.getHoraConsulta(),
-                                consulta.getProntuario(),
+                                consulta.getProntuario().getDiagnostico(),
                                 consulta.getConsultaStatus(),
-                                consulta.getPagamento(),
                                 consulta.getMotivoCancelamento(),
                                 consulta.getDataCriacao(),
                                 consulta.getDataAtualizacao()
                         )).toList(),
-                        paciente.getPagamento()
+                        paciente.getPagamento().stream().map(
+                                pagamento -> new PagamentoResponse(
+                                        pagamento.getId(),
+                                        pagamento.getFormaPagamento(),
+                                        pagamento.getStatus(),
+                                        pagamento.getValor(),
+                                        pagamento.getDataVencimento(),
+                                        pagamento.getDataPagamento(),
+                                        pagamento.getDataCriado()
+                                )
+                        ).toList()
                 )).toList();
     }
 
@@ -105,21 +117,30 @@ public class PacienteService {
                         paciente.getEstado(),
                         paciente.getDataAtualizacao(),
                         paciente.getConsultasPaciente().stream().map(
-                                consulta -> new ConsultasResponseDto(
+                                consulta -> new ConsultasResponsePacienteDto(
                                         consulta.getId(),
                                         consulta.getMedico().getId(),
                                         consulta.getPaciente().getId(),
                                         consulta.getDataConsulta(),
                                         consulta.getHoraConsulta(),
-                                        consulta.getProntuario(),
+                                        consulta.getProntuario().getDiagnostico(),
                                         consulta.getConsultaStatus(),
-                                        consulta.getPagamento(),
                                         consulta.getMotivoCancelamento(),
                                         consulta.getDataCriacao(),
                                         consulta.getDataAtualizacao()
                                 )
                         ).toList(),
-                        paciente.getPagamento()
+                        paciente.getPagamento().stream().map(
+                                pagamento -> new PagamentoResponse(
+                                        pagamento.getId(),
+                                        pagamento.getFormaPagamento(),
+                                        pagamento.getStatus(),
+                                        pagamento.getValor(),
+                                        pagamento.getDataVencimento(),
+                                        pagamento.getDataPagamento(),
+                                        pagamento.getDataCriado()
+                                )
+                        ).toList()
                 )).findFirst();
 
     }
