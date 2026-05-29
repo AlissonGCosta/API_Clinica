@@ -42,8 +42,8 @@ public class PagamentoEntity {
     private StatusPagamentoEnum status;
 
     private BigDecimal valor;
-    private String DataVencimento;
-    private String DataPagamento;
+    private String dataVencimento;
+    private String dataPagamento;
     private LocalDate dataCriado;
 
 

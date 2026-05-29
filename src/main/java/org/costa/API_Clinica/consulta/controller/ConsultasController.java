@@ -2,6 +2,7 @@ package org.costa.API_Clinica.consulta.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.costa.API_Clinica.consulta.dto.request.ConsultaERequestPutDto;
 import org.costa.API_Clinica.consulta.dto.request.ConsultasRequestDto;
 import org.costa.API_Clinica.consulta.dto.response.ConsultasResponseDto;
 import org.costa.API_Clinica.consulta.service.ConsultasService;
@@ -30,5 +31,11 @@ public class ConsultasController {
     @ResponseStatus(HttpStatus.OK)
     public List<ConsultasResponseDto> listarConsultas(){
         return consultasService.listarTodasConsultas();
+    }
+
+    @PutMapping("/{id}/concluir")
+    @ResponseStatus(HttpStatus.OK)
+    public void alterarStatusConsultaConcluido(@PathVariable UUID id, @Valid @RequestBody ConsultaERequestPutDto dto){
+        consultasService.altearConsuta(dto, id);
     }
 }
