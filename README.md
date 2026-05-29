@@ -42,12 +42,12 @@ Construir uma solução com fluxo completo de agendamento, atendimento, faturame
 
 ## Regras de negócio (obrigatórias)
 
-1. O paciente agenda consulta para um médico em data/hora específica.
-2. O médico não pode ter duas consultas no mesmo horário.
-3. O paciente não pode ter duas consultas no mesmo horário.
-4. Consulta só pode ser concluída se status for `AGENDADA`.
-5. Ao concluir consulta, deve ser criado automaticamente:
-   - um `Prontuario`;
+1. O paciente agenda consulta para um médico em data/hora específica. ✓
+2. O médico não pode ter duas consultas no mesmo horário. ✓
+3. O paciente não pode ter duas consultas no mesmo horário. ✓
+4. Consulta só pode ser concluída se status for `AGENDADA`. ✓
+5. Ao concluir consulta, deve ser criado automaticamente: 
+   - um `Prontuario`; ✓
    - um `Pagamento` com status inicial `PENDENTE`.
 6. Paciente com pagamento vencido e não pago (`PENDENTE` + `dataVencimento < hoje`) não pode agendar nova consulta.
 7. Cancelamento com menos de 24h da consulta gera taxa de cancelamento:
