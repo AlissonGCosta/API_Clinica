@@ -67,7 +67,13 @@ public class ConsultasService {
             throw new ConflictException("ja Existe um consulta Agendada com essa Data e Hora");
         }
 
-
+        // validando status do paciente
+        if(pacienteEntity.getPagamento().stream().anyMatch(
+                p -> p.getStatus().equals(StatusPagamentoEnum.PENDENTE))
+        || pacienteEntity.getPagamento().stream().anyMatch(
+                p -> p.getStatus().equals(StatusPagamentoEnum.REPROVADO))){
+            throw new ConflictException("Paciente não pode estar em debito");
+        }
 
         // criando a consulta
         ConsultaEntity novaConsulta =  ConsultaEntity.builder()
