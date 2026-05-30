@@ -63,4 +63,10 @@ public class ConsultaEntity {
     private LocalDate DataAtualizacao;
 
 
+    public String[] returnProntuario(){
+        String[] dados = {this.getProntuario().getDiagnostico(), this.getProntuario().getPrescricao(), this.getProntuario().getObservacao()};
+
+        return dados;
+    }
+
 }

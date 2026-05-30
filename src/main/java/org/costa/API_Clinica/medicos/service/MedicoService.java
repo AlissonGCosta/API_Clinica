@@ -83,9 +83,9 @@ public class MedicoService {
                                         consulta.getPaciente().getId(),
                                         consulta.getDataConsulta(),
                                         consulta.getHoraConsulta(),
-                                        consulta.getProntuario().getDiagnostico(),
+                                        consulta.getProntuario().getConsulta().returnProntuario(),
                                         consulta.getConsultaStatus(),
-                                        consulta.getPagamento(),
+                                        consulta.getPagamento().getStatus(),
                                         consulta.getMotivoCancelamento(),
                                         consulta.getDataCriacao(),
                                         consulta.getDataAtualizacao()
@@ -116,9 +116,9 @@ public class MedicoService {
                                         consulta.getPaciente().getId(),
                                         consulta.getDataConsulta(),
                                         consulta.getHoraConsulta(),
-                                        consulta.getProntuario().getDiagnostico(),
+                                        consulta.getProntuario().getConsulta().returnProntuario(),
                                         consulta.getConsultaStatus(),
-                                        consulta.getPagamento(),
+                                        consulta.getPagamento().getStatus(),
                                         consulta.getMotivoCancelamento(),
                                         consulta.getDataCriacao(),
                                         consulta.getDataAtualizacao()

@@ -47,4 +47,5 @@ public class PagamentoEntity {
     private LocalDate dataCriado;
 
 
+
 }
