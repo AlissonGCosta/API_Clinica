@@ -6,6 +6,8 @@ import org.costa.API_Clinica.especialidade.dto.response.EspecialidadeResponseDto
 import org.costa.API_Clinica.especialidade.entity.EspcialidadeEntity;
 import org.costa.API_Clinica.especialidade.repository.EspecialidadeRepository;
 import org.costa.API_Clinica.exception.ConflictException;
+import org.costa.API_Clinica.medicos.dto.response.MedicoResponseDto;
+import org.costa.API_Clinica.medicos.dto.response.MedicoResponseEspecialidadeDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,7 +39,17 @@ public class EspecialidadeService {
                 .map( esp -> new EspecialidadeResponseDto(
                                 esp.getId(),
                                 esp.getNome(),
-                                esp.getMedicos()
+                                esp.getMedicos().stream().map(
+                                        medico -> new MedicoResponseEspecialidadeDto(
+                                                medico.getId(),
+                                                medico.getNome(),
+                                                medico.getCrm(),
+                                                medico.getEstado(),
+                                                medico.getDataCriacao(),
+                                                medico.getDataAtualizacao()
+
+                                        )
+                                ).toList()
                         )
                 ).toList();
     }
