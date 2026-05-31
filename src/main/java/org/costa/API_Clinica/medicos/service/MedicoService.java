@@ -1,6 +1,7 @@
 package org.costa.API_Clinica.medicos.service;
 
 import org.costa.API_Clinica.config.PasswordConfig;
+import org.costa.API_Clinica.consulta.dto.response.ConsultasResponseAgendadoDto;
 import org.costa.API_Clinica.consulta.dto.response.ConsultasResponseDto;
 import org.costa.API_Clinica.especialidade.entity.EspcialidadeEntity;
 import org.costa.API_Clinica.especialidade.repository.EspecialidadeRepository;
@@ -77,15 +78,13 @@ public class MedicoService {
                         medico.getDataAtualizacao(),
                         medico.getEspecialidade(),
                         medico.getConsultas().stream()
-                                .map(consulta -> new ConsultasResponseDto(
+                                .map(consulta -> new ConsultasResponseAgendadoDto(
                                         consulta.getId(),
                                         consulta.getMedico().getId(),
                                         consulta.getPaciente().getId(),
                                         consulta.getDataConsulta(),
                                         consulta.getHoraConsulta(),
-                                        consulta.getProntuario().getConsulta().returnProntuario(),
                                         consulta.getConsultaStatus(),
-                                        consulta.getPagamento().getStatus(),
                                         consulta.getMotivoCancelamento(),
                                         consulta.getDataCriacao(),
                                         consulta.getDataAtualizacao()
@@ -110,15 +109,13 @@ public class MedicoService {
                         medico.getDataAtualizacao(),
                         medico.getEspecialidade(),
                         medico.getConsultas().stream()
-                                .map(consulta -> new ConsultasResponseDto(
+                                .map(consulta -> new ConsultasResponseAgendadoDto(
                                         consulta.getId(),
                                         consulta.getMedico().getId(),
                                         consulta.getPaciente().getId(),
                                         consulta.getDataConsulta(),
                                         consulta.getHoraConsulta(),
-                                        consulta.getProntuario().getConsulta().returnProntuario(),
                                         consulta.getConsultaStatus(),
-                                        consulta.getPagamento().getStatus(),
                                         consulta.getMotivoCancelamento(),
                                         consulta.getDataCriacao(),
                                         consulta.getDataAtualizacao()
