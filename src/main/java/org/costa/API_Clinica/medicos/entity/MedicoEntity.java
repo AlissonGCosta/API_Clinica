@@ -30,6 +30,9 @@ public class MedicoEntity {
     @Column(length = 36, nullable = false, updatable = false)
     private UUID id;
 
+    @Enumerated(EnumType.STRING)
+    private MedicoRoles role;
+
     private String nome;
     private String crm;
 

@@ -1,0 +1,10 @@
+ALTER TABLE medicos
+ADD COLUMN  role VARCHAR(50) NOT NULL;
+
+UPDATE medicos
+SET role = 'MEDICO_ROLES'
+WHERE role IS NULL;
+
+ALTER TABLE medicos
+ADD CONSTRAINT ck_medicos_role
+CHECK ( role IN ('MEDICO_ROLES', 'MEDICO_ADMIN_ROLES'));
