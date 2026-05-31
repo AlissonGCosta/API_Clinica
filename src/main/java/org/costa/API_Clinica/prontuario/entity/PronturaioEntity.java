@@ -33,4 +33,6 @@ public class PronturaioEntity {
     @OneToOne
     @JoinColumn(name = "consulta_id", referencedColumnName = "id")
     private ConsultaEntity consulta;
+
+
 }

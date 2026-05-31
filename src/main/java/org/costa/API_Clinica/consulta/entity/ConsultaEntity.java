@@ -64,7 +64,24 @@ public class ConsultaEntity {
 
 
     public String[] returnProntuario(){
-        String[] dados = {this.getProntuario().getDiagnostico(), this.getProntuario().getPrescricao(), this.getProntuario().getObservacao()};
+        var prontuario = this.getProntuario();
+
+        if(prontuario == null){
+            String[] dados = {"nenhum prontuario elaborado"};
+            return dados;
+        }
+
+        if(prontuario.getDiagnostico() == null
+                || prontuario.getPrescricao() == null
+                || prontuario.getObservacao() == null ){
+            String[] dados = {"nenhum prontuario elaborado"};
+            return dados;
+        }
+
+
+        String[] dados = {prontuario.getDiagnostico(),
+                prontuario.getPrescricao(),
+                prontuario.getObservacao()};
 
         return dados;
     }

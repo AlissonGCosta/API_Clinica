@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.costa.API_Clinica.consulta.dto.request.ConsultaERequestPutDto;
 import org.costa.API_Clinica.consulta.dto.request.ConsultasRequestDto;
+import org.costa.API_Clinica.consulta.dto.response.ConsultasResponseAgendadoDto;
 import org.costa.API_Clinica.consulta.dto.response.ConsultasResponseDto;
 import org.costa.API_Clinica.consulta.service.ConsultasService;
 import org.springframework.http.HttpStatus;
@@ -29,8 +30,13 @@ public class ConsultasController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ConsultasResponseDto> listarConsultas(){
+    public List<ConsultasResponseAgendadoDto> listarConsultas(){
         return consultasService.listarTodasConsultas();
+    }
+    @GetMapping("/concluidas")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ConsultasResponseDto> listarConsultasConcluidas(){
+        return consultasService.listarConusltasConluidas();
     }
 
     @PutMapping("/{id}/concluir")

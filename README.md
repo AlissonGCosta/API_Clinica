@@ -46,10 +46,10 @@ Construir uma solução com fluxo completo de agendamento, atendimento, faturame
 2. O médico não pode ter duas consultas no mesmo horário. ✓
 3. O paciente não pode ter duas consultas no mesmo horário. ✓
 4. Consulta só pode ser concluída se status for `AGENDADA`. ✓
-5. Ao concluir consulta, deve ser criado automaticamente: 
+5. Ao concluir consulta, deve ser criado automaticamente: ✓
    - um `Prontuario`; ✓
    - um `Pagamento` com status inicial `PENDENTE`.✓
-6. Paciente com pagamento vencido e não pago (`PENDENTE` + `dataVencimento < hoje`) não pode agendar nova consulta.
+6. Paciente com pagamento vencido e não pago (`PENDENTE` + `dataVencimento < hoje`) não pode agendar nova consulta.✓
 7. Cancelamento com menos de 24h da consulta gera taxa de cancelamento:
    - criar um `Pagamento` adicional (tipo `TAXA_CANCELAMENTO`).
 8. Consulta cancelada ou concluída não pode voltar para `AGENDADA`.

@@ -59,7 +59,7 @@ public class MedicoController {
 
     @PatchMapping("/{id}/senha")
     @ResponseStatus(HttpStatus.OK)
-    public void alterarNome(@PathVariable UUID id, @Valid @RequestBody MedicoRequestSenhaDto dto){
+    public void alterarSenha(@PathVariable UUID id, @Valid @RequestBody MedicoRequestSenhaDto dto){
         medicoService.alterarSenha(dto, id);
     }
 

@@ -1,20 +1,17 @@
 package org.costa.API_Clinica.consulta.dto.response;
 
 import org.costa.API_Clinica.consulta.entity.ConsultaStatus;
-
-
+import org.costa.API_Clinica.pagamento.entity.StatusPagamentoEnum;
 
 import java.time.LocalDate;
-
 import java.util.UUID;
 
-public record ConsultasResponsePacienteDto(
+public record ConsultasResponseAgendadoDto(
         UUID id,
         UUID medico,
         UUID paciente,
         String data_consulta,
         String hora_consulta,
-        String prontuario,
         ConsultaStatus consultaStatus,
         String motivoCancelamento,
         LocalDate DataCriacao,

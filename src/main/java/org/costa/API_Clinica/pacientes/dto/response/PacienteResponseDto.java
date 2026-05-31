@@ -1,6 +1,7 @@
 package org.costa.API_Clinica.pacientes.dto.response;
 
 import org.costa.API_Clinica.consulta.dto.response.ConsultasResponseDto;
+import org.costa.API_Clinica.consulta.dto.response.ConsultasResponsePacienteAgendamentoDto;
 import org.costa.API_Clinica.consulta.dto.response.ConsultasResponsePacienteDto;
 import org.costa.API_Clinica.consulta.entity.ConsultaEntity;
 import org.costa.API_Clinica.pacientes.entity.Ativo;
@@ -22,7 +23,7 @@ public record PacienteResponseDto(
         LocalDate dataCriacao,
         Ativo estado,
         LocalDate dataAtualizacao,
-        List<ConsultasResponsePacienteDto> consultasPaciente,
+        List<ConsultasResponsePacienteAgendamentoDto> consultasPaciente,
         List<PagamentoResponse> pagamentos
 ) {
 }

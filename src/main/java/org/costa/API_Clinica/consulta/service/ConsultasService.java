@@ -3,7 +3,9 @@ package org.costa.API_Clinica.consulta.service;
 import lombok.RequiredArgsConstructor;
 import org.costa.API_Clinica.consulta.dto.request.ConsultaERequestPutDto;
 import org.costa.API_Clinica.consulta.dto.request.ConsultasRequestDto;
+import org.costa.API_Clinica.consulta.dto.response.ConsultasResponseAgendadoDto;
 import org.costa.API_Clinica.consulta.dto.response.ConsultasResponseDto;
+import org.costa.API_Clinica.consulta.dto.response.ConsultasResponsePacienteDto;
 import org.costa.API_Clinica.consulta.entity.ConsultaEntity;
 import org.costa.API_Clinica.consulta.entity.ConsultaStatus;
 import org.costa.API_Clinica.consulta.repository.ConsultaRepository;
@@ -23,8 +25,11 @@ import org.costa.API_Clinica.prontuario.repository.ProntuarioRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -67,13 +72,21 @@ public class ConsultasService {
             throw new ConflictException("ja Existe um consulta Agendada com essa Data e Hora");
         }
 
-        // validando status do paciente
-        if(pacienteEntity.getPagamento().stream().anyMatch(
-                p -> p.getStatus().equals(StatusPagamentoEnum.PENDENTE))
-        || pacienteEntity.getPagamento().stream().anyMatch(
-                p -> p.getStatus().equals(StatusPagamentoEnum.REPROVADO))){
-            throw new ConflictException("Paciente não pode estar em debito");
+
+        // validando a validade e status do paciente
+        Optional<PagamentoEntity> pagamentoPendendte = pacienteEntity.getPagamento().stream()
+                .filter(pag -> pag.getStatus() == StatusPagamentoEnum.PENDENTE)
+                .findFirst();
+
+        if(pagamentoPendendte.isPresent()){
+            String dataVencimento = pagamentoPendendte.get().getDataVencimento();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate vencimento = LocalDate.parse(dataVencimento, formatter);
+            if (vencimento.isBefore(LocalDate.now())) {
+                throw new ConflictException("paciente n pode estar em debito");
+            }
         }
+
 
         // criando a consulta
         ConsultaEntity novaConsulta =  ConsultaEntity.builder()
@@ -90,17 +103,35 @@ public class ConsultasService {
         consultaRepository.save(novaConsulta);
     }
 
-    // criando o metodo para listar todas as consultas
-    public List<ConsultasResponseDto> listarTodasConsultas(){
+    // criando o metodo para listar todas as consultas agendadas
+    public List<ConsultasResponseAgendadoDto> listarTodasConsultas(){
 
         return consultaRepository.findAll().stream()
+                .map(consulta -> new ConsultasResponseAgendadoDto(
+                        consulta.getId(),
+                        consulta.getMedico().getId(),
+                        consulta.getPaciente().getId(),
+                        consulta.getDataConsulta(),
+                        consulta.getHoraConsulta(),
+                        consulta.getConsultaStatus(),
+                        consulta.getMotivoCancelamento(),
+                        consulta.getDataCriacao(),
+                        consulta.getDataAtualizacao()
+                )).toList();
+    }
+
+    // criando o metodo para listar consultas apenas concluidas
+    public List<ConsultasResponseDto> listarConusltasConluidas(){
+
+
+        return consultaRepository.findByConsultaStatus(ConsultaStatus.CONCLUIDA).stream()
                 .map(consulta -> new ConsultasResponseDto(
                         consulta.getId(),
                         consulta.getMedico().getId(),
                         consulta.getPaciente().getId(),
                         consulta.getDataConsulta(),
                         consulta.getHoraConsulta(),
-                        consulta.getProntuario().getConsulta().returnProntuario(),
+                        consulta.returnProntuario(),
                         consulta.getConsultaStatus(),
                         consulta.getPagamento().getStatus(),
                         consulta.getMotivoCancelamento(),
@@ -158,5 +189,6 @@ public class ConsultasService {
                 .dataVencimento(dto.getPagamento().getDataVencimento())
                 .build();
         pagamentoRepository.save(novoPagamento);
+
     }
 }
