@@ -13,6 +13,7 @@ import org.costa.API_Clinica.exception.ConflictException;
 import org.costa.API_Clinica.exception.ResourceNotFoundException;
 import org.costa.API_Clinica.medicos.entity.MedicoEntity;
 import org.costa.API_Clinica.medicos.repository.MedicosRepository;
+import org.costa.API_Clinica.pacientes.entity.Ativo;
 import org.costa.API_Clinica.pacientes.entity.PacienteEntity;
 import org.costa.API_Clinica.pacientes.repository.PacienteRepository;
 import org.costa.API_Clinica.pagamento.entity.FormaPagamentoEnum;
@@ -50,9 +51,17 @@ public class ConsultasService {
         MedicoEntity medicoEntity = medicosRepository.findById(medId)
                 .orElseThrow(() -> new ResourceNotFoundException("Medico não encontrado"));
 
+        if(medicoEntity.getEstado().equals(Ativo.INATIVO)){
+            throw new ConflictException("medico esta inativo ou ferias");
+        }
+
         // validando o paciente com o id
         PacienteEntity pacienteEntity = pacienteRepository.findById(pacID)
                 .orElseThrow(() -> new ResourceNotFoundException("Paciente não encontrado"));
+
+        if(pacienteEntity.getEstado().equals(Ativo.INATIVO)){
+            throw new ConflictException("paciente esta inativo");
+        }
 
         // validando se o medico entity ja tem uma para essa consulta
         boolean checagemDataeHora = medicoEntity.getConsultas().stream()
@@ -85,6 +94,15 @@ public class ConsultasService {
             if (vencimento.isBefore(LocalDate.now())) {
                 throw new ConflictException("paciente n pode estar em debito");
             }
+        }
+
+        // validando data no passado
+        String dataAgendada = dto.getDataConsulta();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate agendamento = LocalDate.parse(dataAgendada, formatter);
+
+        if (agendamento.isBefore(LocalDate.now())) {
+            throw new ConflictException("Consulta n pode ser marcada no passado");
         }
 
 
