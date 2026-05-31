@@ -52,15 +52,15 @@ Construir uma solução com fluxo completo de agendamento, atendimento, faturame
 6. Paciente com pagamento vencido e não pago (`PENDENTE` + `dataVencimento < hoje`) não pode agendar nova consulta.✓
 7. Cancelamento com menos de 24h da consulta gera taxa de cancelamento:
    - criar um `Pagamento` adicional (tipo `TAXA_CANCELAMENTO`).
-8. Consulta cancelada ou concluída não pode voltar para `AGENDADA`.
+8. Consulta cancelada ou concluída não pode voltar para `AGENDADA`.✓
 9. Apenas `ADMIN` pode excluir médico ou paciente.
-10. Não permitir conclusão de consulta já cancelada/concluída.
-11. Não permitir agendamento de consulta em data/hora no passado.
-12. Não permitir agendamento para paciente ou médico inativo (`ativo = false`).
-13. Ao cancelar consulta com pagamento `PAGO` do tipo `CONSULTA`, registrar crédito para reaproveitamento em próxima consulta (sem estorno automático).
-14. Ao pagar um `Pagamento`, registrar obrigatoriamente `dataPagamento` e impedir pagamento duplicado.
-15. Pagamentos vencidos (`status = PENDENTE` e `dataVencimento < hoje`) devem ser atualizados para `VENCIDO` antes da validação de novo agendamento.
-16. Consultas de um mesmo médico devem respeitar intervalo mínimo de 30 minutos entre horários.
+10. Não permitir conclusão de consulta já cancelada/concluída.✓
+11. Não permitir agendamento de consulta em data/hora no passado.✓
+12. Não permitir agendamento para paciente ou médico inativo (`ativo = false`).✓
+13. Ao cancelar consulta com pagamento `PAGO` do tipo `CONSULTA`, registrar crédito para reaproveitamento em próxima consulta (sem estorno automático).✓
+14. Ao pagar um `Pagamento`, registrar obrigatoriamente `dataPagamento` e impedir pagamento duplicado. ✓
+15. Pagamentos vencidos (`status = PENDENTE` e `dataVencimento < hoje`) devem ser atualizados para `VENCIDO` antes da validação de novo agendamento.✓
+16. Consultas de um mesmo médico devem respeitar intervalo mínimo de 30 minutos entre horários.✓
 
 ---
 
