@@ -69,5 +69,10 @@ public class PacienteController {
         pacienteService.deletePaciente(id);
     }
 
+    @PatchMapping("/{pacienteId}/pac/{dividaId}/div")
+    @ResponseStatus(HttpStatus.OK)
+    public void alterarStatusDivida(@PathVariable UUID pacienteId, @PathVariable UUID dividaId){
+        pacienteService.setPagamentoPago(pacienteId, dividaId);
+    }
 
 }
