@@ -14,6 +14,9 @@ import org.costa.API_Clinica.pacientes.entity.PacienteEntity;
 import org.costa.API_Clinica.pacientes.repository.PacienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.costa.API_Clinica.pagamento.dto.response.PagamentoResponse;
+import org.costa.API_Clinica.pagamento.entity.PagamentoEntity;
+import org.costa.API_Clinica.pagamento.entity.StatusPagamentoEnum;
+import org.costa.API_Clinica.pagamento.repository.PagamentoRepository;
 import org.costa.API_Clinica.prontuario.dto.response.ProntuarioResponseDto;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +31,7 @@ public class PacienteService {
 
     //chamando o repostitory do paciente
     private final PacienteRepository pacienteRepository;
+    private final PagamentoRepository pagamentoRepository;
 
     private final PasswordConfig passwordConfig;
 
@@ -216,6 +220,32 @@ public class PacienteService {
         novoPaciente.setDataAtualizacao(LocalDate.now());
 
         pacienteRepository.save(novoPaciente);
+    }
+
+    // metodo para concluir pagamento
+    public void setPagamentoPago(UUID pacienteId, UUID dividaId){
+
+        //checando a existencia do paciente
+        if(pacienteRepository.findById(pacienteId).isEmpty()){
+            throw new ResourceNotFoundException("Paciente nao encontrado");
+        }
+
+        // checando a existencia
+        PagamentoEntity pagamento = pagamentoRepository.findById(dividaId)
+                .orElseThrow(() -> new ResourceNotFoundException("Fatura n encontrada"));
+
+        // validando se a fatura ja foi paga
+        if(pagamento.getStatus().equals(StatusPagamentoEnum.APROVADO)){
+            throw new ConflictException("Fatura ja paga");
+        }
+
+        if(pagamento.getStatus().equals(StatusPagamentoEnum.REPROVADO)){
+            throw new UnauthorizedException("Fatura reprovada");
+        }
+
+
+        pagamento.setStatus(StatusPagamentoEnum.APROVADO);
+        pagamentoRepository.save(pagamento);
     }
 
 }
