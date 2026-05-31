@@ -56,11 +56,8 @@ public class ConsultaEntity {
 
     private String motivoCancelamento;
 
-    @Temporal(TemporalType.DATE)
-    private LocalDate DataCriacao;
-
-    @Temporal(TemporalType.DATE)
-    private LocalDate DataAtualizacao;
+    private LocalDate dataCriacao;
+    private LocalDate dataAtualizacao;
 
 
     public String[] returnProntuario(){

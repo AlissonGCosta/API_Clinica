@@ -14,6 +14,7 @@ import org.costa.API_Clinica.medicos.dto.request.MedicoRequestPutDto;
 import org.costa.API_Clinica.medicos.dto.request.MedicoRequestSenhaDto;
 import org.costa.API_Clinica.medicos.dto.response.MedicoResponseDto;
 import org.costa.API_Clinica.medicos.entity.MedicoEntity;
+import org.costa.API_Clinica.medicos.entity.MedicoRoles;
 import org.costa.API_Clinica.medicos.repository.MedicosRepository;
 import org.costa.API_Clinica.pacientes.entity.Ativo;
 import lombok.RequiredArgsConstructor;
@@ -54,6 +55,7 @@ public class MedicoService {
         MedicoEntity medicoEntity = MedicoEntity.builder()
                 .nome(dto.getNome())
                 .crm(dto.getCrm())
+                .role(MedicoRoles.MEDICO_ROLES)
                 .senha(senhaCrpitografada)
                 .estado(Ativo.ATIVO)
                 .dataCriacao(LocalDate.now())

@@ -114,8 +114,8 @@ public class ConsultasService {
                 .horaConsulta(dto.getHoraConsulta())
                 .consultaStatus(ConsultaStatus.AGENDADA)
                 .motivoCancelamento(dto.getMotivoCancelamento())
-                .DataCriacao(LocalDate.now())
-                .DataAtualizacao(LocalDate.now())
+                .dataCriacao(LocalDate.now())
+                .dataAtualizacao(LocalDate.now())
                 .build();
 
         consultaRepository.save(novaConsulta);
